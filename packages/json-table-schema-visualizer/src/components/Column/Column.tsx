@@ -22,6 +22,7 @@ interface ColumnProps {
   relationalTables?: string[] | null;
   offsetY?: number;
   note?: string;
+  remarksWidth: number;
 }
 
 const Column = ({
@@ -33,6 +34,7 @@ const Column = ({
   relationalTables,
   isEnum,
   note,
+  remarksWidth,
 }: ColumnProps) => {
   const themeColors = useThemeColors();
   const tableColors = useTableColor(tableName);
@@ -40,6 +42,9 @@ const Column = ({
 
   const colTextColor = themeColors.text[900];
   const typeTextColor = themeColors.text[700];
+  const fieldColumnsWidth = tablePreferredWidth - remarksWidth;
+  const fieldNameWidth = fieldColumnsWidth * 0.58;
+  const typeWidth = fieldColumnsWidth - fieldNameWidth;
   const fontStyle = isPrimaryKey ? "bold" : "normal";
   const colNameBaseFill = isPrimaryKey
     ? tableColors?.regular ?? colTextColor
@@ -64,7 +69,7 @@ const Column = ({
                 ? tableColors?.regular ?? colNameBaseFill
                 : colNameBaseFill
             }
-            width={tablePreferredWidth}
+            width={fieldNameWidth}
             fontStyle={fontStyle}
             padding={PADDINGS.sm}
             height={COLUMN_HEIGHT}
@@ -72,13 +77,26 @@ const Column = ({
           />
 
           <KonvaText
+            x={fieldNameWidth}
             text={type}
-            align="right"
-            width={tablePreferredWidth}
+            align="left"
+            width={typeWidth}
             // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/prefer-nullish-coalescing
             fill={(highlighted && tableColors?.regular) || typeTextColor}
             padding={TABLE_FIELD_TYPE_PADDING}
             fontStyle={fontStyle}
+            fontSize={FONT_SIZES.md}
+            height={COLUMN_HEIGHT}
+          />
+
+          <KonvaText
+            x={fieldColumnsWidth}
+            text={note ?? ""}
+            ellipsis
+            wrap="none"
+            fill={typeTextColor}
+            width={remarksWidth}
+            padding={PADDINGS.sm}
             fontSize={FONT_SIZES.md}
             height={COLUMN_HEIGHT}
           />

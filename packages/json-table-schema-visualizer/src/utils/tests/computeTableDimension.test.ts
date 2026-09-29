@@ -5,6 +5,7 @@ import {
   TABLE_HEADER_HEIGHT,
   TABLE_DEFAULT_MIN_WIDTH,
   COLUMN_HEIGHT,
+  TABLE_REMARKS_COLUMN_WIDTH,
 } from "@/constants/sizing";
 
 jest.mock("../computeTextSize", () => ({
@@ -20,7 +21,7 @@ describe("compute table dimension", () => {
     const expectedHeight =
       TABLE_HEADER_HEIGHT + COLUMN_HEIGHT * table.fields.length;
     expect(computeTableDimension(table)).toEqual({
-      width: TABLE_DEFAULT_MIN_WIDTH,
+      width: TABLE_DEFAULT_MIN_WIDTH + TABLE_REMARKS_COLUMN_WIDTH,
       height: expectedHeight,
     });
   });

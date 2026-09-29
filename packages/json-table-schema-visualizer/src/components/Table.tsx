@@ -11,8 +11,8 @@ import type Konva from "konva";
 import {
   COLUMN_HEIGHT,
   PADDINGS,
-  TABLE_COLOR_HEIGHT,
   TABLE_HEADER_HEIGHT,
+  TABLE_REMARKS_COLUMN_WIDTH,
 } from "@/constants/sizing";
 import { useThemeColors, useThemeContext } from "@/hooks/theme";
 import { Theme } from "@/types/theme";
@@ -31,7 +31,7 @@ import computeFieldDisplayTypeName from "@/utils/getFieldType";
 
 interface TableProps extends JSONTableTable {}
 
-const Table = ({ fields, name }: TableProps) => {
+const Table = ({ fields, name, note }: TableProps) => {
   const themeColors = useThemeColors();
   const { detailLevel } = useTableDetailLevel();
   const tableRef = useRef<null | Konva.Group>(null);
@@ -52,10 +52,7 @@ const Table = ({ fields, name }: TableProps) => {
   }, [tableX, tableY]);
 
   const tableHeight =
-    TABLE_COLOR_HEIGHT +
-    COLUMN_HEIGHT +
-    visibleFields.length * COLUMN_HEIGHT +
-    PADDINGS.sm;
+    TABLE_HEADER_HEIGHT + visibleFields.length * COLUMN_HEIGHT + PADDINGS.sm;
 
   const tableDragEventName = computeTableDragEventName(name);
 
@@ -142,7 +139,7 @@ const Table = ({ fields, name }: TableProps) => {
         cornerRadius={PADDINGS.sm}
       />
 
-      <TableHeader title={name} />
+      <TableHeader title={name} note={note} />
       {detailLevel !== TableDetailLevel.HeaderOnly ? (
         <Group y={TABLE_HEADER_HEIGHT}>
           {visibleFields.map((field, index) => (
@@ -156,6 +153,7 @@ const Table = ({ fields, name }: TableProps) => {
               offsetY={index * COLUMN_HEIGHT}
               relationalTables={field.relational_tables}
               note={field.note}
+              remarksWidth={TABLE_REMARKS_COLUMN_WIDTH}
             />
           ))}
         </Group>

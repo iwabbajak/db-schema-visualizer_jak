@@ -1,0 +1,380 @@
+Table ACCOUNTS {
+  ACCOUNT_ID nvarchar [pk, not null]
+  ACCOUNT_NM varchar(150)
+  ACCOUNT_DS varchar(250)
+  ACTIVE varchar(1)
+  CREATE_USER_ID varchar(50)
+  CREATE_TS nvarchar
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS nvarchar
+  ACCT_ROLE_ID varchar(3)
+  ACCT_SALES_ID nvarchar
+  PROG_MNGR_ID nvarchar
+  CUSTOMER_CONTACT varchar(200)
+  SHIP_TO_ADDRESS varchar(200)
+  CUSTOMER_ADDRESS varchar(200)
+  ORACLE_ID varchar(20)
+  IS_PROSPECT varchar(5)
+  SERVICENOW_ID varchar(20)
+  MASTER_CUSTOMER_SYSID varchar(100)
+}
+
+Table OPP_MG_CUSTOMER_OPPORTUNITIES {
+  OPPORTUNITY_ID nvarchar [not null]
+  CUSTOMER_PROJECT_ID nvarchar [not null]
+  TER_OPP_ID varchar(20) [not null]
+  TER_PART_NUMBER varchar(50)
+  TER_DESING_IN_REGION_ID nvarchar [not null]
+  FUNDING_TYPE varchar(100) [not null]
+  TEST_PLATFOTM varchar(20) [not null]
+  TEST_TYPE varchar(20) [not null]
+  HW_TYPE_ID nvarchar [not null]
+  AWP_SEED_FILE_ID varchar(20)
+  TESTER_CONFIGURATION_INFO varchar(20)
+  PLANNED_DESIGN_CMPLX_LEVEL nvarchar
+  PLANNED_FAB_CMPLX_LEVEL nvarchar
+  ACTUAL_DESIGN_CMPLX_LEVEL nvarchar
+  ACTUAL_FAB_CMPLX_LEVEL nvarchar
+  OPP_STATUS varchar(15) [not null]
+  TECHNICAL_CLOSURE varchar(15)
+  COMMERCIAL_CLOSURE varchar(15)
+  COMPETITIVE_CLOSURE varchar(15)
+  WON_LOSS_REASON varchar(50)
+  PROJECT_AWARD_BASELINE_DATE datetime2 [not null]
+  PROJECT_AWARD_PROJECTED_DATE datetime2
+  PROJECT_AWARD_ACTUAL_DATE datetime2
+  DESING_START_BASELINE_DATE datetime2
+  DESING_START_PROJECTED_DATE datetime2
+  DESING_START_ACTUAL_DATE datetime2
+  PROJECT_LEAD_NOTE varchar(4000)
+  CREATE_USER_ID varchar(50)
+  CREATE_TS nvarchar
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS nvarchar
+  CUSTOMER_PURCHASING_CONTACT varchar(50)
+  CUSTOMER_TECHNICAL_CONTACT varchar(50)
+  TER_SALES_ACCOUNT_OWNER varchar(50)
+  DIS_PROJECT_LEAD_ID nvarchar [not null,note: 'Regional Design Lead']
+  DIS_DESIGN_LEAD_ID nvarchar [note: 'GDC Manager']
+  DIS_OPERATIONS_OWNER_ID nvarchar [note: 'Planner']
+  DIS_REGIONAL_MANAGER_ID nvarchar [not null,note: 'Sales']
+  DIS_APPS_SUPPORT_NAME varchar(50)
+  DIS_APPS_SUPPORT_EMAIL varchar(50)
+  DIS_APPS_SUPPORT_LOCATION_ID nvarchar
+  KEY_SOCKET varchar(3)
+  DIS_MASTER_KEY varchar(20)
+  SHARED_SOLUTION_DATA_ID nvarchar
+  DIS_OPP_DESCRIPTION varchar(300)
+  DESING_GERBER_OUT_DATE datetime2
+  PROJECT_CUSTOMER_NEED_DATE datetime2
+  LOCAL_DESIGN nvarchar
+  MECH_DESIGN nvarchar
+  SIMULATION nvarchar
+  DESIGN_PLANNER_NOTES varchar(300)
+  DESIGN_CAPACITY_RESERVED nvarchar
+  PRIORITY_LEVEL nvarchar
+  DESING_APPROVAL_ACTUAL_DATE datetime2
+  DESING_MLO_GERBER_OUT_DATE datetime2
+  DIS_PROJECT_MANAGER nvarchar [note: 'Customer Care']
+  PCB_TER_PN varchar(50)
+  MLO_TER_PN varchar(50)
+  SHARED_ID varchar(20)
+  ASSY_FINISH_DATE datetime2
+  DIB_DIAG_DATE datetime2
+  ACTIVE nvarchar [not null]
+  DIS_REPEAT_COORDINATOR_ID nvarchar [note: 'Repeat Coordinator']
+  DIS_TECHNICAL_SALES nvarchar [note: 'Technical Sales']
+  ACTUAL_GERBER_OUT_DATE datetime2
+  ACTUAL_MLO_GERBER_OUT_DATE datetime2
+  DIS_DESIGN_MANAGER nvarchar  [note: 'Design Manager']
+}
+
+Table OPP_MG_CUSTOMER_PROJECTS {
+  CUSTOMER_ID nvarchar [not null]
+  SPECIFIER_REGION_ID nvarchar [note: 'Customer Engineering Team Region']
+  SPECIFIER_CODE varchar(20)
+  SHIP_TO_CUSTOMER_ID varchar(20)
+  SHIP_TO_CUSTOMER_REGION_ID nvarchar [note: 'Where is the Final Delivery Region']
+  SHIP_TO_CUSTOMER_CODE varchar(20)
+  CUSTOMER_DEVICE_NAME varchar(500) [not null]
+  DEVICE_PART_NUMBER varchar(500)
+  INDUSTRY_ID nvarchar [not null]
+  SEGMENT_ID nvarchar [not null]
+  SUBSEGMENT_ID nvarchar
+  CREATE_USER_ID varchar(50)
+  CREATE_TS nvarchar
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS nvarchar
+  CUSTOMER_PURCHASING_CONTACT varchar(50)
+  CUSTOMER_TECHNICAL_CONTACT varchar(50)
+  TER_SALES_ACCOUNT_OWNER varchar(50)
+  OPP_MG_STAGE varchar(45)
+  ACCOUNT_ID nvarchar [not null]
+  DIS_MASTER_KEY varchar(20)
+  CUSTOMER_CATEGORY_ID nvarchar
+  ACTIVE nvarchar [not null]
+  IS_STANDARDPRODUCT nvarchar [not null]
+  APIRES_STATUS varchar(20)
+  APIRES_RESPONSE nvarchar
+  API_PAYLOAD nvarchar
+  IS_NEXPROBE nvarchar [not null]
+}
+
+
+Table OPP_MG_NPI_REPEAT {
+  NPI_REPEAT_ID nvarchar [not null]
+  PROJECTED_DATE datetime2
+  VOLUME_FORECAST nvarchar
+  REPEAT_NUMBER nvarchar
+  OPPORTUNITY_ID nvarchar
+  CREATE_USER_ID varchar(50)
+  CREATE_TS nvarchar
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS nvarchar
+  BASELINE_COMMIT_DATE datetime2
+  ACTUAL_DATE datetime2
+  LIKELIHOOD_AWARD_CONFIDENCE nvarchar
+  PROJECT_TYPE_ID nvarchar [not null]
+  EXPECTED_SELLING_PRICE nvarchar
+  EXPECTED_COGS nvarchar
+  EXPECTED_STANDARD_MARGIN nvarchar
+  QUOTE_ID nvarchar
+  SUPPLY_CHAIN_ID nvarchar
+  APL_USAGE_BASELINE_TARGET nvarchar
+  APL_USAGE_ACTUAL_RESULT nvarchar
+  DIB_DIAG_COVER_BASELINE_TARGET varchar(20)
+  DIB_DIAG_COVER_ACTUAL_RESULT varchar(20)
+  VISION_SYS_USE_BASELINE_TARGET varchar(3)
+  VISION_SYS_USE_ACTUAL_RESULT varchar(3)
+  AUTO_PROBE_RF_USE_BASELINE_TGT varchar(3)
+  AUTO_PROBE_RF_USE_ACTUAL_RES varchar(3)
+  BIN1_SER_LOC_BASELINE_TGT_ID nvarchar
+  BIN1_SER_LOC_ACTUAL_RES_ID nvarchar
+  TOTAL_REVENUE nvarchar
+  DIS_MASTER_KEY varchar(20)
+  SHARED_SOLUTION_DATA_ID nvarchar
+  REPEAT_STATUS varchar(15)
+  REPEAT_CUSTOMER_NEED_DATE datetime2
+  SITE_COUNT_QTY nvarchar
+  MLO_SOLUTION varchar(3)
+  ASSY_FINISH_REPEAT datetime2
+  NRE_NPI nvarchar
+  SO_NUMBER nvarchar
+  CUSTOMER_COMMIT_SHIP_DATE datetime2
+  CUSTOMER_COMMIT_SHIP_DATE_CHANGE_NOTE varchar(4000)
+  CUSTOMER_HW_ACCEPTANCE_DATE datetime2
+  SERVICENOW_OPPORTUNITY_ID varchar(100)
+  APIRES_STATUS varchar(20)
+  APIRES_RESPONSE nvarchar
+  API_PAYLOAD nvarchar
+  IS_SPLIT_SHIPMENT nvarchar
+}
+
+
+Table QUOTES {
+  QUOTE_ID nvarchar
+  QUOTE_NUMBER nvarchar
+  DESCRIPTION nvarchar
+  ACCOUNT_ID nvarchar
+  SOLUTION_TYPE_ID nvarchar
+  REVISION nvarchar
+  DATE_OF_INQUIRY nvarchar
+  IMPORT_TYPE nvarchar
+  PAYMENTS_TYPES nvarchar
+  CREATE_USER_ID nvarchar
+  CREATE_TS datetime2
+  UPDATE_USER_ID nvarchar
+  UPDATE_TS datetime2
+  CUSTOMER_NEED_DATE nvarchar
+  ESTIMATED_LEAD_TIME nvarchar
+  QUOTES_STATUS nvarchar
+  QUOTE_TEMPLATE nvarchar
+  CUSTOMER_ADDRESS nvarchar
+  REGION_ID nvarchar
+  CUSTOMER_CONTACT nvarchar
+  SHIP_TO nvarchar
+  CUSTOMER_RFQ nvarchar
+  QUOTE_PART_NUMBER nvarchar
+  INCOTERMS_ID nvarchar
+  TERADYNE_ADDRESS nvarchar
+  TERADYNE_ENTITY_CONTACT nvarchar
+  SALES_PERSON nvarchar
+  DIS_MASTER_KEY nvarchar
+  SHARED_SOLUTION_DATA_ID nvarchar
+}
+
+Table QUOTES_CASES {
+  CASE_ID nvarchar
+  TASK_ID nvarchar
+  TOOL_VERSION_ID nvarchar
+  DATA_ITEM1 nvarchar
+  DATA_ITEM2 nvarchar
+  DATA_ITEM3 nvarchar
+  CREATE_USER_ID nvarchar
+  CASE_STATUS nvarchar
+  CREATE_TS datetime2
+  UPDATE_USER_ID nvarchar
+  UPDATE_TS datetime2
+  ACCOUNT_ID nvarchar
+  QUOTE_ID nvarchar
+  REVISION_CONSECUTIVE nvarchar
+  QUOTE_NUMBER nvarchar
+  TOFU_PL_SUGGESTED_PCB_DISCOUNT nvarchar
+  TOFU_PL_SUGGESTED_NRE_DISCOUNT nvarchar
+}
+
+Table QUOTES_CASE_DATA {
+  CASE_DATA_ID nvarchar
+  CASE_ID nvarchar
+  VERSION_ID nvarchar
+  REFERENCE_NM varchar(250)
+  CONTENT_TX varchar(4000)
+  CREATE_USER_ID varchar(50)
+  CREATE_TS datetime2
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS datetime2
+}
+
+Table QUOTES_OUTPUT_CASE_DATA {
+  CASE_DATA_ID nvarchar [not null]
+  CASE_ID nvarchar [not null]
+  VERSION_ID nvarchar
+  REFERENCE_NM varchar(250)
+  CONTENT_TX varchar(4000)
+  CREATE_USER_ID varchar(50)
+  CREATE_TS nvarchar
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS nvarchar
+}
+
+
+Table STATUS {
+  STATUS_ID nvarchar [pk, not null]
+  SEQ_NO nvarchar
+  STATUS_DS varchar(50) [not null]
+  APPROVAL_ID nvarchar
+  CREATE_USER_ID varchar(50)
+  CREATE_TS datetime2
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS datetime2
+}
+Table CUSTOMER_CATEGORY {
+  CUSTOMER_CATEGORY_ID decimal(38,10) [pk, not null]
+  CUSTOMER_CATEGORY_NM varchar(15) [not null,note: 'TOFU orNON-TOFU']
+  CUSTOMER_CATEGORY_DESCRIPTION varchar(50)
+  CREATE_USER_ID varchar(50)
+  CREATE_TS datetime2
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS datetime2
+}
+
+Table OPP_MG_INDUSTRIES {
+  INDUSTRY_ID int
+  INDUSTRY_NM varchar(100) [not null]
+  CREATE_USER_ID varchar(50)
+  CREATE_TS datetime2
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS datetime2
+}
+
+Table OPP_MG_INDUSTRIES_SEGMENT {
+  SEGMENT_ID nvarchar [not null]
+  SEGMENT_NAME varchar(50) [not null]
+  INDUSTRY_ID nvarchar [not null]
+  CREATE_USER_ID varchar(50)
+  CREATE_TS nvarchar
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS nvarchar
+}
+
+Table USER_ROLE {
+  USER_ROLE_ID nvarchar [pk, not null]
+  USER_ID nvarchar
+  ROLE_ID nvarchar
+  CREATE_USER_ID varchar(50)
+  CREATE_TS datetime2
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS datetime2
+}
+
+
+Table USERS {
+  USER_ID int [pk, not null]
+  FIRST_NM varchar(25)
+  LAST_NM varchar(25)
+  ROLE_ID nvarchar
+  LOGIN_ID varchar(50)
+  REGION_ID nvarchar [not null]
+  ACTIVE_IN char(1)
+  CREATE_USER_ID varchar(50)
+  CREATE_TS datetime2
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS datetime2
+  ACCOUNT_ID nvarchar
+  WORKGROUP_ID nvarchar
+  EMAIL varchar(60)
+}
+
+Table ROLE {
+  ROLE_ID nvarchar [pk, not null]
+  ROLE_NM varchar(50)
+  ROLE_DS varchar(250)
+  CREATE_PROJ_FL nvarchar
+  EDIT_PROJECT_FL nvarchar
+  EDIT_ASSIGNMENTS_FL nvarchar
+  COMPLETE_TASKS_FL nvarchar
+  CREATE_USER_ID varchar(50)
+  CREATE_TS datetime2
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS datetime2
+  REVIEW_DESIGN_FL nvarchar
+  PROJ_ACCESS_FL nvarchar
+}
+
+Table QUOTES_TASKS {
+  TASK_ID nvarchar [not null]
+  TASK_LU_ID nvarchar [not null]
+  STATUS_ID nvarchar [not null]
+  ASSIGNED_USER_ID nvarchar
+  START_DATE nvarchar
+  END_DATE nvarchar
+  APPROVAL1 nvarchar [not null]
+  APPROVAL2 nvarchar [not null]
+  CREATE_USER_ID varchar(50)
+  CREATE_TS datetime2
+  UPDATE_USER_ID varchar(50)
+  UPDATE_TS datetime2
+  TOOL_TASK_ID nvarchar
+  QUOTE_ID nvarchar
+  IS_ESCALATED nvarchar [not null]
+}
+
+
+Table PROJECT_TYPE {
+  PROJECT_TYPE_ID nvarchar [pk]
+  PROJECT_TYPE_NM varchar(25)
+  PROJECT_TYPE_DS varchar(250)
+  CREATE_USER_ID varchar(50)
+  CREATE_TS datetime2
+  UPDATE_USER_IS varchar(50)
+  UPDATE_TS datetime2
+  TOOL_ID nvarchar
+}
+
+Ref: OPP_MG_CUSTOMER_PROJECTS.ACCOUNT_ID > ACCOUNTS.ACCOUNT_ID
+Ref: OPP_MG_CUSTOMER_PROJECTS.CUSTOMER_CATEGORY_ID > CUSTOMER_CATEGORY.CUSTOMER_CATEGORY_ID
+Ref: QUOTES.ACCOUNT_ID > ACCOUNTS.ACCOUNT_ID
+Ref: QUOTES_CASES.ACCOUNT_ID > ACCOUNTS.ACCOUNT_ID
+Ref: USER_ROLE.USER_ID > USERS.USER_ID
+Ref: USER_ROLE.ROLE_ID > ROLE.ROLE_ID
+Ref: OPP_MG_CUSTOMER_OPPORTUNITIES.CUSTOMER_PROJECT_ID > OPP_MG_CUSTOMER_PROJECTS.CUSTOMER_ID
+Ref: OPP_MG_NPI_REPEAT.OPPORTUNITY_ID > OPP_MG_CUSTOMER_OPPORTUNITIES.OPPORTUNITY_ID
+Ref: OPP_MG_NPI_REPEAT.QUOTE_ID > QUOTES.QUOTE_ID
+Ref: OPP_MG_INDUSTRIES.INDUSTRY_ID > OPP_MG_CUSTOMER_PROJECTS.INDUSTRY_ID
+Ref: OPP_MG_INDUSTRIES_SEGMENT.SEGMENT_ID > OPP_MG_CUSTOMER_PROJECTS.SEGMENT_ID
+Ref: QUOTES.QUOTE_ID > QUOTES_CASES.QUOTE_ID
+Ref: QUOTES_CASES.CASE_ID > QUOTES_CASE_DATA.CASE_ID
+Ref: QUOTES_CASES.CASE_ID > QUOTES_OUTPUT_CASE_DATA.CASE_DATA_ID
+Ref: QUOTES_TASKS.QUOTE_ID > QUOTES.QUOTE_ID
+Ref: QUOTES_TASKS.STATUS_ID > STATUS.STATUS_ID
+Ref: OPP_MG_NPI_REPEAT.PROJECT_TYPE_ID > PROJECT_TYPE.PROJECT_TYPE_ID

@@ -1,12 +1,16 @@
 # DBML ERD Visualizer
 
-Allow to visualize the database schema in ERD ( Entity Relationship Diagram ) from .dbml file in your vscode.
+Maintained by [@iwabbajak](https://github.com/iwabbajak). This community-maintained version is based on the original DBML ERD Visualizer by [BOCOVO](https://github.com/BOCOVO/db-schema-visualizer).
+
+Visualize database schemas from `.dbml` files as Entity Relationship Diagrams in VS Code.
 
 ## Features
 
 ![Demo](https://github.com/BOCOVO/db-schema-visualizer/assets/51182814/a59fd0c0-246d-4f00-be39-9885d88b8b85)
 
 - Create Entity Relationship Diagram from your dbml file
+- Display field comments and table descriptions from DBML notes
+- Zoom in and out with the toolbar slider or mouse wheel
 - Allow you to drag diagrams
 - Support both light and dark themes
 - Multiple display mode. Display all columns, relational columns only or table headers only
@@ -24,4 +28,5 @@ Release notes are [here](./CHANGELOG.md)
 
 ## Author
 
-[@BOCOVO](https://github.com/BOCOVO)
+- Maintainer: [@iwabbajak](https://github.com/iwabbajak)
+- Original project and attribution: [BOCOVO/db-schema-visualizer](https://github.com/BOCOVO/db-schema-visualizer)

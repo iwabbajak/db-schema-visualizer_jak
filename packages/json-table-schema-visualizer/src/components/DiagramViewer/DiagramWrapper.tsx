@@ -1,5 +1,5 @@
 import { Group, Layer, Stage } from "react-konva";
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { type KonvaEventObject } from "konva/lib/Node";
 
 import Toolbar from "../Toolbar/Toolbar";
@@ -8,7 +8,11 @@ import type { Stage as CoreStage } from "konva/lib/Stage";
 
 import { useWindowSize } from "@/hooks/window";
 import { useCursorChanger } from "@/hooks/cursor";
-import { DIAGRAM_PADDING } from "@/constants/sizing";
+import {
+  DIAGRAM_PADDING,
+  MAX_STAGE_SCALE,
+  MIN_STAGE_SCALE,
+} from "@/constants/sizing";
 import { useThemeColors } from "@/hooks/theme";
 import { useStageStartingState } from "@/hooks/stage";
 import { stageStateStore } from "@/stores/stagesState";
@@ -40,27 +44,53 @@ const DiagramWrapper = ({ children }: DiagramWrapperProps) => {
   // repositioning the stage only once
   const { scale: defaultStageScale, position: defaultStagePosition } =
     useStageStartingState();
+  const [zoomScale, setZoomScale] = useState(defaultStageScale);
+
+  const clampScale = (scale: number) =>
+    Math.min(MAX_STAGE_SCALE, Math.max(MIN_STAGE_SCALE, scale));
+
+  const updateZoom = (
+    requestedScale: number,
+    focalPoint: { x: number; y: number },
+  ) => {
+    const stage = stageRef.current;
+    if (stage == null) return;
+
+    const oldScale = stage.scaleX();
+    const newScale = clampScale(requestedScale);
+    const stagePoint = {
+      x: (focalPoint.x - stage.x()) / oldScale,
+      y: (focalPoint.y - stage.y()) / oldScale,
+    };
+    const newPosition = {
+      x: focalPoint.x - stagePoint.x * newScale,
+      y: focalPoint.y - stagePoint.y * newScale,
+    };
+
+    stage.scale({ x: newScale, y: newScale });
+    stage.position(newPosition);
+    stage.batchDraw();
+    setZoomScale(newScale);
+    stageStateStore.set({ scale: newScale, position: newPosition });
+  };
+
   useEffect(() => {
     if (stageRef.current != null) {
+      const scale = clampScale(defaultStageScale);
       stageRef.current.scale({
-        x: defaultStageScale,
-        y: defaultStageScale,
+        x: scale,
+        y: scale,
       });
       stageRef.current.position(defaultStagePosition);
+      setZoomScale(scale);
     }
   }, [defaultStageScale, defaultStagePosition]);
 
   const handleZooming = (e: KonvaEventObject<WheelEvent>) => {
     e.evt.preventDefault();
     const stage = e.currentTarget as CoreStage;
-    const oldScale = stage.scaleX();
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const pointer = stage.getPointerPosition()!;
-
-    const mousePointTo = {
-      x: (pointer.x - stage.x()) / oldScale,
-      y: (pointer.y - stage.y()) / oldScale,
-    };
 
     // how to scale? Zoom in? Or zoom out?
     let direction = 0;
@@ -76,16 +106,9 @@ const DiagramWrapper = ({ children }: DiagramWrapperProps) => {
       direction = -direction;
     }
 
-    const newScale = direction > 0 ? oldScale * scaleBy : oldScale / scaleBy;
-
-    stage.scale({ x: newScale, y: newScale });
-
-    const newPos = {
-      x: pointer.x - mousePointTo.x * newScale,
-      y: pointer.y - mousePointTo.y * newScale,
-    };
-    stage.position(newPos);
-    stageStateStore.set({ scale: newScale, position: newPos });
+    const newScale =
+      direction > 0 ? stage.scaleX() * scaleBy : stage.scaleX() / scaleBy;
+    updateZoom(newScale, pointer);
   };
 
   const nodeBelongsToTable = (node: any): boolean => {
@@ -132,7 +155,7 @@ const DiagramWrapper = ({ children }: DiagramWrapperProps) => {
       contentBounds.height = contentBounds.height + 2 * DIAGRAM_PADDING;
       const scaleX = containerWidth / contentBounds.width;
       const scaleY = containerHeight / contentBounds.height;
-      const scale = Math.min(scaleX, scaleY);
+      const scale = clampScale(Math.min(scaleX, scaleY));
 
       stage.scale({ x: scale, y: scale });
       stage.position({
@@ -144,6 +167,7 @@ const DiagramWrapper = ({ children }: DiagramWrapperProps) => {
           contentBounds.y * scale,
       });
       stage.batchDraw();
+      setZoomScale(scale);
       stageStateStore.set({ scale, position: stage.position() });
     }
   };
@@ -268,7 +292,14 @@ const DiagramWrapper = ({ children }: DiagramWrapperProps) => {
         </Layer>
       </Stage>
 
-      <Toolbar onFitToView={fitToView} onDownload={onDownload} />
+      <Toolbar
+        onFitToView={fitToView}
+        onDownload={onDownload}
+        zoomScale={zoomScale}
+        onZoomChange={(scale) => {
+          updateZoom(scale, { x: windowWidth / 2, y: windowHeight / 2 });
+        }}
+      />
     </>
   );
 };

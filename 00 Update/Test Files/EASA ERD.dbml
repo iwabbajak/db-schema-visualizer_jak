@@ -3,7 +3,7 @@ Table ACCOUNTS [headercolor: #8C9EFF] {
   ACCOUNT_ID varchar [pk]
   ACCOUNT_NM varchar
   ACCOUNT_DS varchar
-  ACTIVR varchar
+  ACTIVR varchar [note: 'Employee full name']
   CREATE_USER_ID varchar
   CREATE_TS timestamp
   UPDATE_USER_ID varchar

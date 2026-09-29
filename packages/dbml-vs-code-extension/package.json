@@ -1,15 +1,23 @@
 {
   "name": "dbml-erd-visualizer",
-  "displayName": "DBML Entity-Relationship Diagrams visualizer",
-  "description": "A VS Code extension for viewing the ERD (Entity Relationship Diagram) database schema from a dbml file in your VS Code Editor.",
-  "version": "0.8.0",
+  "displayName": "DBML ERD Visualizer (Maintained by iwabbajak)",
+  "description": "Visualize DBML schemas in VS Code with field remarks, table descriptions, and interactive zoom. Maintained by iwabbajak; based on the original BOCOVO project.",
+  "version": "0.8.3",
   "icon": "assets/logo.png",
-  "publisher": "bocovo",
+  "publisher": "iwabbajak",
+  "author": "iwabbajak (maintainer; based on the original work by BOCOVO)",
   "engines": {
     "vscode": "^1.87.0"
   },
   "categories": [
-    "Other"
+    "Visualization"
+  ],
+  "keywords": [
+    "DBML",
+    "ERD",
+    "database",
+    "schema",
+    "diagram"
   ],
   "activationEvents": [],
   "main": "./dist/extension/index.js",

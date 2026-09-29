@@ -4,6 +4,26 @@ All notable changes to the "dbml-erd-visualizer" extension will be documented in
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.8.3]
+
+### Changed
+
+- Update extension description, category, and keywords to reflect current features
+- Document field remarks, table descriptions, and interactive zoom
+
+## [0.8.2]
+
+### Added
+
+- Add a toolbar zoom slider synchronized with mouse-wheel zoom and fit-to-view
+
+## [0.8.1]
+
+### Added
+
+- Display field remarks and table descriptions from DBML notes
+- Identify iwabbajak as maintainer while retaining attribution to the original BOCOVO project
+
 ## [0.8.0]
 
 ### Added
