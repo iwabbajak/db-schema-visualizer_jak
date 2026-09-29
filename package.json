@@ -1,6 +1,7 @@
 {
   "name": "db-schema-visualiser",
   "version": "0.0.3",
+  "packageManager": "yarn@1.22.22",
   "main": "index.js",
   "license": "MIT",
   "private": true,

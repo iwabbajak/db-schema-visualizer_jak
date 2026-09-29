@@ -1,18 +1,16 @@
-.vscode/**
-.vscode-test/**
-out/**
-node_modules/**
-src/**
-.gitignore
-.yarnrc
-webpack.config.js
-vsc-extension-quickstart.md
-**/tsconfig.json
-**/.eslintrc.json
-**/*.map
-**/*.ts
-**/.vscode-test.*
-*.vsix
-extension/**
-index.html
-vite.config.js
+# Ignore everything by default
+**
+
+# Keep only the extension runtime and metadata
+!package.json
+!README.md
+!CHANGELOG.md
+!LICENCE
+!index.html
+!assets/**
+!icons/**
+!dist/**
+
+# Keep the key bundle outputs explicitly in case glob rules are filtered
+!dist/extension/**
+!dist/webview/**

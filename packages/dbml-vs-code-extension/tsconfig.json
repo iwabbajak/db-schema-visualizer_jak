@@ -12,6 +12,7 @@
     "paths": {
       "@/*": ["./*"]
     },
+    "ignoreDeprecations": "6.0",
     "skipLibCheck": true
   },
   "exclude": ["node_modules", "vite.config.js"],

@@ -1,0 +1,248 @@
+
+Table ACCOUNTS [headercolor: #8C9EFF] {
+  ACCOUNT_ID varchar [pk]
+  ACCOUNT_NM varchar
+  ACCOUNT_DS varchar
+  ACTIVR varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_ID varchar
+  UPDATE_TS timestamp
+  ACCT_ROLE_ID varchar
+  ACCT_SALES_ID varchar
+  PROG_MNGR_ID varchar
+  CUSTOMER_CONTACT varchar
+  SHIP_TO_ADDRESS varchar
+  CUSTOMER_ADDRESS varchar
+  ORACLE_ID varchar
+  IS_PROSPECT varchar
+  SERVICNEOW_ID varchar
+}
+
+Table OPP_MG_INDUSTRIES [headercolor: #FFB6E6] {
+  INDUSTRY_ID varchar [pk]
+  INDUSTRY_NM varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_ID varchar
+  UPDATE_TS timestamp
+}
+
+Table OPP_MG_INDUSTRIES_SEGMENT [headercolor: #FFB6E6] {
+  SEGMENT_ID varchar [pk]
+  SEGMENT_NAME varchar
+  INDUSTRY_ID varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_ID varchar
+  UPDATE_TS timestamp
+}
+
+Table SOLUTION_TYPE [headercolor: #FFF6A5] {
+  SOLUTION_TYPE_ID varchar [pk]
+  SOLUTION_TYPE_NAME varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_IS varchar
+  UPDATE_TS timestamp
+  TOOL_ID varchar
+}
+
+Table OPP_MG_CUSTOMER_PROJECTS [headercolor: #8C9EFF] {
+  CUSTOMER_ID varchar [pk]
+  ACCOUNT_ID varchar [ref: > ACCOUNTS.ACCOUNT_ID]
+  SPECIFIER_REGION_ID varchar
+  SPECIFIER_CODE varchar
+  SHIP_TO_CUSTOMER_ID varchar
+  SHIP_TO_CUSTOMER_REGION_ID varchar
+  SHIP_TO_CUSTOMER_CODE varchar
+  CUSTOMER_DEVICE_NAME varchar
+  DEVICE_PART_NUMBER varchar
+  INDUSTRY_ID varchar [ref: > OPP_MG_INDUSTRIES.INDUSTRY_ID]
+  SEGMENT_ID varchar [ref: > OPP_MG_INDUSTRIES_SEGMENT.SEGMENT_ID]
+  SUBSEGMENT_ID varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_ID varchar
+  CUSTOMER_PURCHASING_CONTACT varchar
+  CUSTOMER_TECHNICAL_CONTACT varchar
+  TER_SALES_ACCOUNT_OWNER varchar
+  OPP_MG_STAGE varchar
+  DIS_MASTER_KEY varchar [ref: > DIS_MASTER_TABLE.DIS_MASTER_KEY]
+  CUSTOMER_CATEGORY_ID varchar [ref: > CUSTOMER_CATEGORY.CUSTOMER_CATEGORY_ID]
+  ACTIVE varchar
+}
+
+Table PROJECT_TYPE [headercolor: #FFB6E6] {
+  PROJECT_TYPE_ID varchar [pk]
+  PROJET_TYPE_NM varchar
+  PROJECT_TYPE_DS varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_IS varchar
+  UPDATE_TS timestamp
+  TOOL_ID varchar
+}
+
+Table DIS_MASTER_TABLE [headercolor: #FFB6E6] {
+  DIS_MASTER_KEY varchar [pk]
+  ID varchar
+  ACCOUNT_ID varchar
+  CUSTOMER varchar
+  CUSTOMER_BUYER_ID varchar
+  REGION_ID varchar
+  SALES_ACCOUNT_OWNER varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_ID varchar
+  UPDATE_TIMESTAMP timestamp
+}
+
+Table CUSTOMER_CATEGORY [headercolor: #FFB6E6] {
+  CUSTOMER_CATEGORY_ID varchar [pk]
+  CUSTOMER_CATEGORY_NM varchar
+  CUSTOMER_CATEGORY_DESCRIPTION varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_ID varchar
+  UPDATE_TS timestamp
+}
+
+Table OPP_MG_CUSTOMER_OPPORTUNITIES [headercolor: #8C9EFF] {
+  OPPORTUNITY_ID varchar [pk]
+  CUSTOMER_PROJECT_ID varchar [ref: > OPP_MG_CUSTOMER_PROJECTS.CUSTOMER_ID]
+  TER_OPP_ID varchar
+  TER_PART_NUMBER varchar
+  TER_DESING_IN_REGION_ID varchar
+  FUNDING_TYPE varchar
+  TEST_PLATFORM varchar [ref: > TEST_PLATFORMS.ID]
+  TEST_TYPE varchar
+  HW_TYPE_ID varchar [ref: > PROJECT_TYPE.PROJECT_TYPE_ID]
+  PLANNED_DESIGN_CMPLX_LEVEL varchar
+  PLANNED_FAB_CMPLX varchar
+  OPP_STATUS varchar
+  PROJECT_AWARD_BASELINE_DATE date
+  PROJECT_AWARD_PROJECTED_DATE date
+  DESING_START_BASELINE_DATE date
+  DESING_START_PROJECTED_DATE date
+  DESING_START_ACTUAL_DATE date
+  PROJECT_LEAD_NOTE varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_ID varchar
+  UPDATE_TS timestamp
+  CUSTOMER_PURCHASING_CONTACT varchar
+  CUSTOMER_TECHNICAL_CONTACT varchar
+  TER_SALES_ACCOUNT_OWNER varchar
+  DIS_PROJECT_LEAD_ID varchar
+  DIS_APPS_SUPPORT_NAME varchar
+  DIS_APPS_SUPPORT_EMAIL varchar
+  DIS_APPS_SUPPORT_LOCATION_ID varchar
+  KEY_SOCKET varchar
+  DIS_MASTER_KEY varchar [ref: > DIS_MASTER_TABLE.DIS_MASTER_KEY]
+  SHARED_SOLUTION_DATA_ID varchar [ref: > DIS_SHARED_SOLUTION_DATA.SOLUTION_ID]
+  DIS_OPP_DESCRIPTION varchar
+  DESING_GERBER_OUT_DATE date
+  PROJECT_CUSTOMER_NEED_DATE date
+  LOCAL_DESIGN varchar
+  MECH_DESIGN varchar
+  SIMULATION varchar
+  DESIGN_PLANNER_NOTES varchar
+  DESIGN_CAPACITY_RESERVED varchar
+  PRIORITY_LEVEL varchar
+  DESING_APPROVAL_ACTUAL_DATE date
+  DESING_MLO_GERBER_OUT_DATE date
+  DIS_PROJECT_MANAGER varchar
+  PCB_TER_PN varchar
+  MLO_TER_PN varchar
+  SHARED_ID varchar
+  ASSY_FINISH_DATE date
+  DIB_DIAG_DATE date
+  ACTIVE varchar
+  DIS_REPEAR_COORDINATOR_ID varchar
+  DIS_TECHNICAL_SALES varchar
+}
+
+Table TEST_PLATFORMS [headercolor: #FFB6E6] {
+  ID varchar [pk]
+  INDUSTRY_NM varchar
+  TEST_PLATFORM_NM varchar
+}
+
+Table DIS_SHARED_SOLUTION_DATA [headercolor: #FFB6E6] {
+  SOLUTION_ID varchar [pk]
+  TER_PN varchar
+  PLATFORM varchar
+  ACTUAL_DESIGN_CMPLX_LEVEL varchar
+  PLANNED_DESIGN_CMPLX_LEVEL varchar
+  PLANNED_FAB_CMPLX_LEVEL varchar
+  PROJECT_LEAD_ID varchar
+  CHDC_ACCOUNT_LEAD_ID varchar
+  CHDC_MANAGER_ID varchar
+  CHDC_DESIGNER_ID varchar
+  PLANNER_ID varchar
+  SUPPLIER_QUALITY_ENGINEER varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_ID varchar
+  UPDATE_TIMESTAMP timestamp
+  CHDC_CROSS_CHECKER varchar
+  CHDC_ENGINEER_ID varchar
+  PCB_TER_PN varchar
+  MLO_TER_PN varchar
+  PROJECT_MANAGER_ID varchar
+}
+
+Table SUPPLY_CHAIN [headercolor: #FFB6E6] {
+  SUPPLY_CHAIN_ID varchar [pk]
+  SUPPLIER_PCB_FABRICATION_ID varchar
+  SUPPLIER_PCB_ASSEMBLY_ID varchar
+  MLO_FABRICATION_ID varchar
+  MLO_ASSEMBLY_AND_ATTACH_ID varchar
+  FLYING_PROBE_TEST_ID varchar
+  PROBE_HEAD_SOCKET_VENDOR_ID varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_ID varchar
+  UPDATE_TS timestamp
+}
+
+Table OPP_MG_NPI_REPEAT [headercolor: #8C9EFF] {
+  NPI_REPEAT_ID varchar [pk]
+  OPPORTUNITY_ID varchar [ref: > OPP_MG_CUSTOMER_OPPORTUNITIES.OPPORTUNITY_ID]
+  PROJECTED_DATE date
+  VOLUME_FORECAST varchar
+  CREATE_USER_ID varchar
+  CREATE_TS timestamp
+  UPDATE_USER_ID varchar
+  UPDATE_TS timestamp
+  BASELINE_COMMIT_DATE date
+  ACTUAL_DATE date
+  LIKELIHOOD_AWARD_CONFIDENCE varchar
+  PROJECT_TYPE_ID varchar
+  EXPECTED_SELLING_PRICE varchar
+  EXPECTED_COGS varchar
+  EXPECTED_STANDARD_MARGIN varchar
+  QUOTE_ID varchar
+  SUPPLY_CHAIN_ID varchar [ref: > SUPPLY_CHAIN.SUPPLY_CHAIN_ID]
+  APL_USAGE_BASELINE_TARGET varchar
+  APL_USAGE_ACTUAL_RESULT varchar
+  DIB_DIAG_COVER_BASELINE_TARGET varchar
+  DIB_DIAG_COVER_ACTUAL_RESULT varchar
+  VISION_SYS_USE_BASELINE_TARGET varchar
+  VISION_SYS_USE_ACTUAL_RESULT varchar
+  AUTO_PROBE_RF_USE_BASELINE_TGT varchar
+  AUTO_PROBE_RF_USE_ACTUAL_RES varchar
+  BIN1_SER_LOC_BASELINE_TGT_ID varchar
+  BIN1_SER_LOC_ACTUAL_RES_ID varchar
+  TOTAL_REVENUE varchar
+  DIS_MASTER_KEY varchar
+  SHARED_SOLUTION_DATA_ID varchar
+  REPEAT_STATUS varchar
+  REPEAR_CUSTOMER_NEED_DATE date
+  SITE_COUNT_QTY varchar
+  MLO_SOLUTION varchar
+  ASSY_FINISH_REPEAT varchar
+  NRE_NPI varchar
+  SO_NUMBER varchar
+}
