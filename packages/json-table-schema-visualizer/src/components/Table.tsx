@@ -12,7 +12,6 @@ import {
   COLUMN_HEIGHT,
   PADDINGS,
   TABLE_HEADER_HEIGHT,
-  TABLE_REMARKS_COLUMN_WIDTH,
 } from "@/constants/sizing";
 import { useThemeColors, useThemeContext } from "@/hooks/theme";
 import { Theme } from "@/types/theme";
@@ -153,7 +152,6 @@ const Table = ({ fields, name, note }: TableProps) => {
               offsetY={index * COLUMN_HEIGHT}
               relationalTables={field.relational_tables}
               note={field.note}
-              remarksWidth={TABLE_REMARKS_COLUMN_WIDTH}
             />
           ))}
         </Group>

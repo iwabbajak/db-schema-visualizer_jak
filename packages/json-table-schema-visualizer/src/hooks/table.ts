@@ -65,3 +65,13 @@ export const useTableWidth = (): number => {
 
   return contextValue?.width ?? TABLE_DEFAULT_MIN_WIDTH;
 };
+
+export const useTableColumnDimensions = () => {
+  const contextValue = useContext(TableDimensionContext);
+
+  if (contextValue == null) {
+    throw new Error("useTableColumnDimensions must be used within a table");
+  }
+
+  return contextValue;
+};

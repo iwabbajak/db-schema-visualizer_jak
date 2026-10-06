@@ -11,7 +11,7 @@ import {
   TABLE_FIELD_TYPE_PADDING,
 } from "@/constants/sizing";
 import { useThemeColors } from "@/hooks/theme";
-import { useTableWidth } from "@/hooks/table";
+import { useTableColumnDimensions } from "@/hooks/table";
 
 interface ColumnProps {
   colName: string;
@@ -22,7 +22,6 @@ interface ColumnProps {
   relationalTables?: string[] | null;
   offsetY?: number;
   note?: string;
-  remarksWidth: number;
 }
 
 const Column = ({
@@ -34,17 +33,15 @@ const Column = ({
   relationalTables,
   isEnum,
   note,
-  remarksWidth,
 }: ColumnProps) => {
   const themeColors = useThemeColors();
   const tableColors = useTableColor(tableName);
-  const tablePreferredWidth = useTableWidth();
+  const { fieldNameWidth, typeWidth, remarksWidth } =
+    useTableColumnDimensions();
 
   const colTextColor = themeColors.text[900];
   const typeTextColor = themeColors.text[700];
-  const fieldColumnsWidth = tablePreferredWidth - remarksWidth;
-  const fieldNameWidth = fieldColumnsWidth * 0.58;
-  const typeWidth = fieldColumnsWidth - fieldNameWidth;
+  const fieldColumnsWidth = fieldNameWidth + typeWidth;
   const fontStyle = isPrimaryKey ? "bold" : "normal";
   const colNameBaseFill = isPrimaryKey
     ? tableColors?.regular ?? colTextColor

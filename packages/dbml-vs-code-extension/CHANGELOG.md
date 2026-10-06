@@ -4,6 +4,13 @@ All notable changes to the "dbml-erd-visualizer" extension will be documented in
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.8.4]
+
+### Changed
+
+- Add draggable dividers to resize the Field, Type, and Remarks columns independently
+- Adjust column widths to make long field names, types, and remarks easier to read
+
 ## [0.8.3]
 
 ### Changed

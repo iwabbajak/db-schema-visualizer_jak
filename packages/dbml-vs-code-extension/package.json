@@ -1,9 +1,9 @@
 {
   "name": "dbml-erd-visualizer",
   "displayName": "DBML ERD Visualizer (Maintained by iwabbajak)",
-  "description": "Visualize DBML schemas in VS Code with field remarks, table descriptions, and interactive zoom. Maintained by iwabbajak; based on the original BOCOVO project.",
-  "version": "0.8.3",
-  "icon": "assets/logo.png",
+  "description": "Visualize DBML schemas in VS Code with resizable field, type, and remarks columns, table descriptions, and interactive zoom. Maintained by iwabbajak; based on the original BOCOVO project.",
+  "version": "0.8.4",
+  "icon": "assets/logowj.png",
   "publisher": "iwabbajak",
   "author": "iwabbajak (maintainer; based on the original work by BOCOVO)",
   "engines": {

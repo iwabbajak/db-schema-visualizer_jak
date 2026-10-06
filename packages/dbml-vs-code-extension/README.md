@@ -12,6 +12,7 @@ Visualize database schemas from `.dbml` files as Entity Relationship Diagrams in
 - Display field comments and table descriptions from DBML notes
 - Zoom in and out with the toolbar slider or mouse wheel
 - Allow you to drag diagrams
+- Resize the Field, Type, and Remarks columns in the diagram to fit content
 - Support both light and dark themes
 - Multiple display mode. Display all columns, relational columns only or table headers only
 
@@ -24,7 +25,19 @@ The following Visual Studio Code settings are available for the extension.
 
 ## Release Notes
 
-Release notes are [here](./CHANGELOG.md)
+### 0.8.4
+
+- Add draggable dividers to resize the Field, Type, and Remarks columns independently
+- Adjust column widths to make long field names, types, and remarks easier to read
+
+Previous release notes are available in the [full changelog](https://github.com/iwabbajak/db-schema-visualizer_jak/blob/HEAD/packages/dbml-vs-code-extension/CHANGELOG.md).
+
+## Update\Modification Notes (iwabbajak)
+
+- Display field remarks and table descriptions from DBML notes
+- Add a toolbar zoom slider synchronized with mouse-wheel zoom and Fit to View
+- Document field remarks, table descriptions, and interactive zoom functionality
+- Add resizable Field, Type, and Remarks columns for better control over long values
 
 ## Author
 

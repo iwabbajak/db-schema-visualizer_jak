@@ -1,4 +1,5 @@
 import { Group, Rect } from "react-konva";
+import type { KonvaEventObject } from "konva/lib/Node";
 
 import KonvaText from "./dumb/KonvaText";
 import FieldDetails from "./FieldDetails/FieldDetails";
@@ -8,11 +9,67 @@ import {
   FONT_SIZES,
   PADDINGS,
   TABLE_COLOR_HEIGHT,
-  TABLE_REMARKS_COLUMN_WIDTH,
 } from "@/constants/sizing";
 import { useThemeColors } from "@/hooks/theme";
 import { useTableColor } from "@/hooks/tableColor";
-import { useTableWidth } from "@/hooks/table";
+import { useTableColumnDimensions, useTableWidth } from "@/hooks/table";
+
+const RESIZE_HANDLE_WIDTH = 8;
+
+interface ResizeHandleProps {
+  boundaryX: number;
+  y: number;
+  color: string;
+  onResize: (boundaryX: number) => void;
+}
+
+const ResizeHandle = ({ boundaryX, y, color, onResize }: ResizeHandleProps) => {
+  const handleDrag = (event: KonvaEventObject<DragEvent>) => {
+    event.cancelBubble = true;
+    onResize(event.target.x() + RESIZE_HANDLE_WIDTH / 2);
+  };
+
+  const stopTableDrag = (event: KonvaEventObject<MouseEvent | TouchEvent>) => {
+    event.cancelBubble = true;
+  };
+
+  return (
+    <>
+      <Rect
+        x={boundaryX - 0.5}
+        y={y}
+        width={1}
+        height={COLUMN_HEIGHT}
+        fill={color}
+        opacity={0.45}
+        listening={false}
+      />
+      <Rect
+        x={boundaryX - RESIZE_HANDLE_WIDTH / 2}
+        y={y}
+        width={RESIZE_HANDLE_WIDTH}
+        height={COLUMN_HEIGHT}
+        fill="rgba(0, 0, 0, 0.001)"
+        draggable
+        onMouseDown={stopTableDrag}
+        onTouchStart={stopTableDrag}
+        onDragStart={(event) => {
+          event.cancelBubble = true;
+        }}
+        onDragMove={handleDrag}
+        onDragEnd={handleDrag}
+        onMouseEnter={(event) => {
+          const stage = event.target.getStage();
+          if (stage != null) stage.container().style.cursor = "col-resize";
+        }}
+        onMouseLeave={(event) => {
+          const stage = event.target.getStage();
+          if (stage != null) stage.container().style.cursor = "default";
+        }}
+      />
+    </>
+  );
+};
 
 interface TableHeaderProps {
   title: string;
@@ -23,9 +80,16 @@ const TableHeader = ({ title, note }: TableHeaderProps) => {
   const themeColors = useThemeColors();
   const tableColors = useTableColor(title);
   const tablePreferredWidth = useTableWidth();
+  const {
+    fieldNameWidth,
+    typeWidth,
+    remarksWidth,
+    resizeFieldBoundary,
+    resizeRemarksBoundary,
+  } = useTableColumnDimensions();
   const tableMarkerColor = tableColors?.regular ?? "red";
-  const fieldsWidth = tablePreferredWidth - TABLE_REMARKS_COLUMN_WIDTH;
-  const fieldNameWidth = fieldsWidth * 0.58;
+  const fieldsWidth = fieldNameWidth + typeWidth;
+  const columnHeaderY = TABLE_COLOR_HEIGHT + COLUMN_HEIGHT * 2;
 
   return (
     <Group>
@@ -69,7 +133,7 @@ const TableHeader = ({ title, note }: TableHeaderProps) => {
         x={PADDINGS.sm}
         y={TABLE_COLOR_HEIGHT + COLUMN_HEIGHT}
         fill={themeColors.text[700]}
-        width={tablePreferredWidth - TABLE_REMARKS_COLUMN_WIDTH - PADDINGS.sm}
+        width={fieldsWidth - PADDINGS.sm}
         height={COLUMN_HEIGHT}
         padding={PADDINGS.xs}
         fontSize={FONT_SIZES.md}
@@ -85,7 +149,7 @@ const TableHeader = ({ title, note }: TableHeaderProps) => {
         x={PADDINGS.sm}
         y={TABLE_COLOR_HEIGHT + COLUMN_HEIGHT * 2}
         fill={themeColors.tableHeader.fg}
-        width={tablePreferredWidth - TABLE_REMARKS_COLUMN_WIDTH}
+        width={fieldNameWidth}
         height={COLUMN_HEIGHT}
         padding={PADDINGS.xs}
         fontSize={FONT_SIZES.md}
@@ -96,7 +160,7 @@ const TableHeader = ({ title, note }: TableHeaderProps) => {
         x={fieldNameWidth}
         y={TABLE_COLOR_HEIGHT + COLUMN_HEIGHT * 2}
         fill={themeColors.tableHeader.fg}
-        width={fieldsWidth - fieldNameWidth}
+        width={typeWidth}
         height={COLUMN_HEIGHT}
         padding={PADDINGS.xs}
         fontSize={FONT_SIZES.md}
@@ -104,14 +168,26 @@ const TableHeader = ({ title, note }: TableHeaderProps) => {
       />
       <KonvaText
         text="Remarks"
-        x={tablePreferredWidth - TABLE_REMARKS_COLUMN_WIDTH}
+        x={fieldsWidth}
         y={TABLE_COLOR_HEIGHT + COLUMN_HEIGHT * 2}
         fill={themeColors.tableHeader.fg}
-        width={TABLE_REMARKS_COLUMN_WIDTH}
+        width={remarksWidth}
         height={COLUMN_HEIGHT}
         padding={PADDINGS.xs}
         fontSize={FONT_SIZES.md}
         fontStyle="bold"
+      />
+      <ResizeHandle
+        boundaryX={fieldNameWidth}
+        y={columnHeaderY}
+        color={themeColors.tableHeader.fg}
+        onResize={resizeFieldBoundary}
+      />
+      <ResizeHandle
+        boundaryX={fieldsWidth}
+        y={columnHeaderY}
+        color={themeColors.tableHeader.fg}
+        onResize={resizeRemarksBoundary}
       />
     </Group>
   );

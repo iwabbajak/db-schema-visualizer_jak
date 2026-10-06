@@ -65,8 +65,8 @@ Table OPP_MG_CUSTOMER_OPPORTUNITIES {
   DIS_MASTER_KEY varchar(20)
   SHARED_SOLUTION_DATA_ID nvarchar
   DIS_OPP_DESCRIPTION varchar(300)
-  DESING_GERBER_OUT_DATE datetime2
-  PROJECT_CUSTOMER_NEED_DATE datetime2
+  DESING_GERBER_OUT_DATE datetime2 [note: 'OTD Projected PCB Gerber Out Date']
+  PROJECT_CUSTOMER_NEED_DATE datetime2 [note: 'NPI OTD Customer Need Date']
   LOCAL_DESIGN nvarchar
   MECH_DESIGN nvarchar
   SIMULATION nvarchar
@@ -74,18 +74,18 @@ Table OPP_MG_CUSTOMER_OPPORTUNITIES {
   DESIGN_CAPACITY_RESERVED nvarchar
   PRIORITY_LEVEL nvarchar
   DESING_APPROVAL_ACTUAL_DATE datetime2
-  DESING_MLO_GERBER_OUT_DATE datetime2
+  DESING_MLO_GERBER_OUT_DATE datetime2 [note: 'OTD Projected MLO Gerber Out Date']
   DIS_PROJECT_MANAGER nvarchar [note: 'Customer Care']
   PCB_TER_PN varchar(50)
   MLO_TER_PN varchar(50)
   SHARED_ID varchar(20)
-  ASSY_FINISH_DATE datetime2
+  ASSY_FINISH_DATE datetime2 [note: 'NPI OTD Assy Finish Date']
   DIB_DIAG_DATE datetime2
   ACTIVE nvarchar [not null]
   DIS_REPEAT_COORDINATOR_ID nvarchar [note: 'Repeat Coordinator']
   DIS_TECHNICAL_SALES nvarchar [note: 'Technical Sales']
-  ACTUAL_GERBER_OUT_DATE datetime2
-  ACTUAL_MLO_GERBER_OUT_DATE datetime2
+  ACTUAL_GERBER_OUT_DATE datetime2 [note: 'OTD Actual PCB Gerber Out Date']
+  ACTUAL_MLO_GERBER_OUT_DATE datetime2 [note: 'OTD Actual MLO Gerber Out Date']
   DIS_DESIGN_MANAGER nvarchar  [note: 'Design Manager']
 }
 
@@ -122,8 +122,8 @@ Table OPP_MG_CUSTOMER_PROJECTS {
 
 
 Table OPP_MG_NPI_REPEAT {
-  NPI_REPEAT_ID nvarchar [not null]
-  PROJECTED_DATE datetime2
+  NPI_REPEAT_ID nvarchar [not null, note: 'Unique Identifier for NPI/Repeat']
+  PROJECTED_DATE datetime2 [note: 'OTD Projected Ship Date']
   VOLUME_FORECAST nvarchar
   REPEAT_NUMBER nvarchar
   OPPORTUNITY_ID nvarchar
@@ -131,9 +131,8 @@ Table OPP_MG_NPI_REPEAT {
   CREATE_TS nvarchar
   UPDATE_USER_ID varchar(50)
   UPDATE_TS nvarchar
-  BASELINE_COMMIT_DATE datetime2
-  ACTUAL_DATE datetime2
-  LIKELIHOOD_AWARD_CONFIDENCE nvarchar
+  BASELINE_COMMIT_DATE datetime2 [note: 'OTD Baseline Commit Ship Date']
+  ACTUAL_DATE datetime2 [note: 'OTD Actual Ship Date']
   PROJECT_TYPE_ID nvarchar [not null]
   EXPECTED_SELLING_PRICE nvarchar
   EXPECTED_COGS nvarchar
@@ -154,15 +153,15 @@ Table OPP_MG_NPI_REPEAT {
   DIS_MASTER_KEY varchar(20)
   SHARED_SOLUTION_DATA_ID nvarchar
   REPEAT_STATUS varchar(15)
-  REPEAT_CUSTOMER_NEED_DATE datetime2
+  REPEAT_CUSTOMER_NEED_DATE datetime2 [note: 'REPEAT OTD Customer Need Date']
   SITE_COUNT_QTY nvarchar
   MLO_SOLUTION varchar(3)
-  ASSY_FINISH_REPEAT datetime2
+  ASSY_FINISH_REPEAT datetime2 [note: 'REPEAT OTD Assembly Finish Date']
   NRE_NPI nvarchar
   SO_NUMBER nvarchar
-  CUSTOMER_COMMIT_SHIP_DATE datetime2
+  CUSTOMER_COMMIT_SHIP_DATE datetime2 [note: 'OTD Customer Commit Ship Date']
   CUSTOMER_COMMIT_SHIP_DATE_CHANGE_NOTE varchar(4000)
-  CUSTOMER_HW_ACCEPTANCE_DATE datetime2
+  CUSTOMER_HW_ACCEPTANCE_DATE datetime2 [note: 'OTD Customer Hardware Acceptance Date']
   SERVICENOW_OPPORTUNITY_ID varchar(100)
   APIRES_STATUS varchar(20)
   APIRES_RESPONSE nvarchar
