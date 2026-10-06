@@ -28,3 +28,30 @@ Follow this article: <https://juste.bocovo.me/preview-dbml-code-from-vscode>
 ## Contribute
 
 If you want to contribute to this project please read the [contribution note](./CODE_OF_CONDUCT.md)
+
+## What's New
+### v0.8.3
+ 
+#### Changed
+ 
+- Updated the extension description, category, and keywords to better reflect the current features
+- Added documentation for field remarks and table descriptions
+- Added documentation for interactive zoom functionality
+ 
+### v0.8.2
+#### Added
+ 
+- Added a toolbar zoom slider
+- Synchronized the toolbar zoom slider with mouse-wheel zoom
+- Added fit-to-view support for easier diagram navigation
+
+## Project Attribution
+ 
+Maintained by [@iwabbajak](https://github.com/iwabbajak).
+ 
+This community-maintained version is based on the original [DB Schema Visualizer](https://github.com/BOCOVO/db-schema-visualizer) project by BOCOVO.
+ 
+## Author & Maintenance
+ 
+- **Maintainer:** [@iwabbajak](https://github.com/iwabbajak)
+- **Original Project:** [BOCOVO/db-schema-visualizer](https://github.com/BOCOVO/db-schema-visualizer)
